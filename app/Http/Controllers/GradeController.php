@@ -15,12 +15,17 @@ class GradeController extends Controller
             ]
         ];
 
-        dump($options);
-
         $client = new Client($options);
         $response = $client->get(route('api.grades.index'));
 
-        dump($response->getStatusCode());
-        dump($response->getBody()->getContents());
+        // dump($response->getStatusCode());
+        // dump($response->getBody()->getContents());
+
+        $result = json_decode($response->getBody()->getContents(), true);
+
+        return view('site.grades', [
+            'title' => 'Grades',
+            'grades' => $result['data'] ?? []
+        ]);
     }
 }
