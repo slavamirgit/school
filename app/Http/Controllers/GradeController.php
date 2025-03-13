@@ -21,6 +21,6 @@ class GradeController extends Controller
         $response = $client->get(route('api.grades.index'));
 
         dump($response->getStatusCode());
-        dump($response->getBody());
+        dump($response->getBody()->getContents());
     }
 }
