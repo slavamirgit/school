@@ -56,8 +56,6 @@ class Store extends Component
             $result = $this->apiRequest('POST', $url, $this->getOptions($options));
         }
 
-        dump($result);
-
         if (isset($result['error'])) {
             $this->error = $result['error'];
         } else {

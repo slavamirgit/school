@@ -33,7 +33,7 @@ class GradeController extends Controller
         return view('site.grades.show', [
             'title' => 'Show Grade',
             'grade' => $this->apiRequest('GET', $showUrl, $this->getOptions())['data'],
-            'students' => $this->apiRequest('GET', $studentsUrl, $this->getOptions())['data']
+            'students' => $this->apiRequest('GET', $studentsUrl, $this->getOptions())['data'] ?? []
         ]);
     }
 
