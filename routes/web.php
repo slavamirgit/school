@@ -24,14 +24,18 @@ Route::middleware('auth:sanctum')->group(function () {
             return view('site.home')->with('title', 'Home');
         })->name('web.home');
 
-        Route::get('/grades', [GradeController::class, 'index'])->name('web.grades.index');
-        Route::get('/grades/create', [GradeController::class, 'create'])->name('web.grades.create');
-        Route::get('/grades/show/{id}', [GradeController::class, 'show'])->name('web.grades.show');
-        Route::get('/grades/edit/{id}', [GradeController::class, 'edit'])->name('web.grades.edit');
+        Route::controller(GradeController::class)->group(function () {
+            Route::get('/grades', 'index')->name('web.grades.index');
+            Route::get('/grades/create', 'create')->name('web.grades.create');
+            Route::get('/grades/show/{id}', 'show')->name('web.grades.show');
+            Route::get('/grades/edit/{id}', 'edit')->name('web.grades.edit');
+        });
 
-        Route::get('/students', [StudentController::class, 'index'])->name('web.students.index');
-        Route::get('/students/create', [StudentController::class, 'create'])->name('web.students.create');
-        Route::get('/students/show/{id}', [StudentController::class, 'show'])->name('web.students.show');
-        Route::get('/students/edit/{id}', [StudentController::class, 'edit'])->name('web.students.edit');
+        Route::controller(StudentController::class)->group(function () {
+            Route::get('/students', 'index')->name('web.students.index');
+            Route::get('/students/create', 'create')->name('web.students.create');
+            Route::get('/students/show/{id}', 'show')->name('web.students.show');
+            Route::get('/students/edit/{id}', 'edit')->name('web.students.edit');
+        });
     });
 });
