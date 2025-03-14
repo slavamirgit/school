@@ -14,9 +14,9 @@ class GradeController extends BaseController
     public function index()
     {
         if (Auth::user()->isDirector()) {
-            $grades = Grade::orderBy('id')->get();
+            $grades = Grade::all();
         } else {
-            $grades = Auth::user()->grades()->orderBy('id')->get();
+            $grades = Auth::user()->grades;
         }
 
         return $this->sendResponse($grades, 'Grades retrieved successfully.');
