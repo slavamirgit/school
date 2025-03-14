@@ -24,23 +24,23 @@ trait ApiRequests
         return $result ?? [];
     }
 
-    protected function checkToken(): void
+    protected function getToken()
     {
         if (session()->missing('school_token')) {
             $token = Auth::user()->createToken('School Token')->plainTextToken;
             $token = explode('|', $token)[1];
             session()->put('school_token', $token);
         }
+
+        return session('school_token');
     }
 
     protected function getOptions($props = []): array
     {
-        $this->checkToken();
-
         $options = [
             'headers' => [
                 'Content-Type' => 'application/json',
-                'Authorization' => 'Bearer ' . session('school_token')
+                'Authorization' => 'Bearer ' . $this->getToken()
                 //'Authorization' => 'Bearer ' . 'EJzQorDDI3IYvVsGi3GxVcYwwf65Dn3ArIu5Cubl3e78317b'
             ],
             'verify' => false,
