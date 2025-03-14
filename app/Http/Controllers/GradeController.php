@@ -28,7 +28,7 @@ class GradeController extends Controller
     public function show($id)
     {
         $showUrl = config('app.api') . '/grades/show/' . $id;
-        $studentsUrl = config('app.api') . '/grades/show/' . $id;
+        $studentsUrl = config('app.api') . '/grades/students/' . $id;
 
         return view('site.grades.show', [
             'title' => 'Show Grade',

@@ -36,7 +36,7 @@ trait ApiRequests
 
     protected function getRemoteToken(): string
     {
-        return 'hC2txM3KCLsBcwUqLFyzMRP4fqU60Yr5j74OrqzX1fe28504';
+        return 'x5dQwl0TFsxhKduDOXnUQhCklNLLokIZkyp40xpwb962dc43';
     }
 
     protected function getOptions($props = []): array
@@ -44,7 +44,7 @@ trait ApiRequests
         $options = [
             'headers' => [
                 'Content-Type' => 'application/json',
-                'Authorization' => 'Bearer ' . $this->getToken()
+                'Authorization' => 'Bearer ' . $this->getRemoteToken()
             ],
             'verify' => false,
             'connect_timeout' => 20,
