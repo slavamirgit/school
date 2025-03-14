@@ -36,7 +36,7 @@ class StudentController extends BaseController
         $validated = $this->validateStudent($request);
         $student = Student::create($validated);
 
-        return $this->sendResponse('Student created successfully.', $student);
+        return $this->sendResponse('Student created successfully.', $student, 201);
     }
 
     public function show($id)

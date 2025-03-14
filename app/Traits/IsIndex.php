@@ -11,7 +11,7 @@ trait IsIndex
 
     public function mountIsIndex($data): void
     {
-        array_multisort(array_column($data, 'id'), SORT_ASC, $data);
+        //array_multisort(array_column($data, 'id'), SORT_ASC, $data);
         $this->data = $data;
         $this->pageNumber = request()->page ?? 1;
     }
