@@ -49,6 +49,7 @@ class Store extends Component
         } else {
             if ($this->grade) {
                 $this->saved = true;
+                $this->error = null;
             } else {
                 $this->redirect(route('web.grades.edit', $result['data']['id']));
             }
