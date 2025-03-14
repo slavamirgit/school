@@ -7,11 +7,13 @@ use Livewire\Attributes\Locked;
 trait IsIndex
 {
     #[Locked]
+    public array $data;
+    #[Locked]
     public int $pageNumber;
 
     public function mountIsIndex($data): void
     {
-        //array_multisort(array_column($data, 'id'), SORT_ASC, $data);
+        array_multisort(array_column($data, 'id'), SORT_ASC, $data);
         $this->data = $data;
         $this->pageNumber = request()->page ?? 1;
     }
