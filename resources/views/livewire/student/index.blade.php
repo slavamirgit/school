@@ -1,10 +1,13 @@
 <div>
-    @dump($grades)
-    {{--
-    @foreach($grades as $_grade)
+    @foreach($students as $_student)
         <div>
-            <div>{{ $_grade->id }} — {{ $_grade->name }}</div>
+            <div>
+                <a href="{{ route('web.students.show', $_student['id']) }}">{{ $_student['id'] }} — {{ $_student['firstname'] . ' ' . $_student['lastname'] . ', ' . $_student['sex'] . ', ' . $_student['age'] }}</a>
+            </div>
         </div>
     @endforeach
-    --}}
+
+    <div class="pagination">
+        {{ $students->links() }}
+    </div>
 </div>

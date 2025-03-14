@@ -9,8 +9,10 @@ trait IsIndex
     #[Locked]
     public int $pageNumber;
 
-    public function mountIsIndex(): void
+    public function mountIsIndex($data): void
     {
+        array_multisort(array_column($data, 'id'), SORT_ASC, $data);
+        $this->data = $data;
         $this->pageNumber = request()->page ?? 1;
     }
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GradeController;
+use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -28,8 +29,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/grades/show/{id}', [GradeController::class, 'show'])->name('web.grades.show');
         Route::get('/grades/edit/{id}', [GradeController::class, 'edit'])->name('web.grades.edit');
 
-        Route::get('/students', function () {
-            return view('site.students')->with('title', 'Students');
-        })->name('web.students.index');
+        Route::get('/students', [StudentController::class, 'index'])->name('web.students.index');
+        Route::get('/students/create', [StudentController::class, 'create'])->name('web.students.create');
+        Route::get('/students/show/{id}', [StudentController::class, 'show'])->name('web.students.show');
+        Route::get('/students/edit/{id}', [StudentController::class, 'edit'])->name('web.students.edit');
     });
 });
