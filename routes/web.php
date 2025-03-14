@@ -5,7 +5,7 @@ use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return 'welcome';
+    return view('site.welcome')->with('title', 'Welcome');
 });
 
 Route::get('/users', function () {
