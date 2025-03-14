@@ -17,6 +17,8 @@ class Store extends Component
     #[Locked]
     public $error;
 
+    public $saved = false;
+
     #[Validate]
     public $name;
 
@@ -30,12 +32,26 @@ class Store extends Component
 
     public function save(): void
     {
-        $result = $this->apiRequest('PUT', route('api.grades.update', $this->grade['id']), $this->getOptions([
+        $options = [
             'name' => $this->name
-        ]));
+        ];
+
+        if ($this->grade) {
+            $result = $this->apiRequest('PUT', route('api.grades.update', $this->grade['id']), $this->getOptions($options));
+            //$result = $this->apiRequest('PUT', 'https://school.slava.app/api/grades/update/' . $this->grade['id'], $this->getOptions($options));
+        } else {
+            $result = $this->apiRequest('PUT', route('api.grades.store'), $this->getOptions($options));
+            //$result = $this->apiRequest('POST', 'https://school.slava.app/api/grades/store', $this->getOptions($options));
+        }
 
         if (isset($result['error'])) {
             $this->error = $result['error'];
+        } else {
+            if ($this->grade) {
+                $this->saved = true;
+            } else {
+                $this->redirect(route('web.grades.edit', $result['data']['id']));
+            }
         }
     }
 

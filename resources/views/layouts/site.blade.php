@@ -17,7 +17,7 @@
         <div class="links">
             <div class="title">{{ __('Grades') }}</div>
             <a href="{{ route('web.grades.index') }}" wire:current.exact="active">{{ __('Index') }}</a>
-            <a href="">{{ __('Create') }}</a>
+            <a href="{{ route('web.grades.create') }}" wire:current.exact="active">{{ __('Create') }}</a>
         </div>
 
         <div class="links">

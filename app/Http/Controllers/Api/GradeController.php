@@ -40,6 +40,10 @@ class GradeController extends BaseController
 
         $grade = Grade::create($validated);
 
+        if (!Auth::user()->isDirector()) {
+            $grade->users()->attach(Auth::id());
+        }
+
         return $this->sendResponse($grade, 'Grade created successfully.');
     }
 

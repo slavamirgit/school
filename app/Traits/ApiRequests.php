@@ -33,6 +33,7 @@ trait ApiRequests
             'headers' => [
                 'Content-Type' => 'application/json',
                 'Authorization' => 'Bearer ' . session('school_token')
+                //'Authorization' => 'Bearer ' . 'EJzQorDDI3IYvVsGi3GxVcYwwf65Dn3ArIu5Cubl3e78317b'
             ],
             'verify' => false,
             'connect_timeout' => 20,
