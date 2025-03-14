@@ -39,7 +39,7 @@ class GradeController extends Controller
 
     public function edit($id)
     {
-        $url = config('app.api') . '/grades';
+        $url = config('app.api') . '/grades/show/' . $id;
 
         return view('site.grades.edit', [
             'title' => 'Edit Grade',
