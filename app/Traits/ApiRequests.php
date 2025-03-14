@@ -44,7 +44,7 @@ trait ApiRequests
         $options = [
             'headers' => [
                 'Content-Type' => 'application/json',
-                'Authorization' => 'Bearer ' . $this->getRemoteToken()
+                'Authorization' => 'Bearer ' . $this->getToken()
             ],
             'verify' => false,
             'connect_timeout' => 20,
