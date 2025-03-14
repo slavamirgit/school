@@ -12,7 +12,7 @@ class GradeController extends Controller
     {
         return view('site.grades.index', [
             'title' => 'Grades',
-            'data' => $this->apiRequest('GET', 'https://school.slava.app/api/grades', $this->getOptions())['data'] ?? []
+            'data' => $this->apiRequest('GET', route('api.grades.index'), $this->getOptions())['data'] ?? []
         ]);
     }
 
@@ -24,8 +24,8 @@ class GradeController extends Controller
     {
         return view('site.grades.show', [
             'title' => 'Show Grade',
-            'grade' => $this->apiRequest('GET', 'https://school.slava.app/api/grades/show/' . $id, $this->getOptions())['data'],
-            'students' => $this->apiRequest('GET', 'https://school.slava.app/api/grades/students/' . $id, $this->getOptions())['data']
+            'grade' => $this->apiRequest('GET', route('api.grades.show', $id), $this->getOptions())['data'],
+            'students' => $this->apiRequest('GET', route('api.grades.students', $id), $this->getOptions())['data']
         ]);
     }
 
@@ -33,7 +33,7 @@ class GradeController extends Controller
     {
         return view('site.grades.edit', [
             'title' => 'Edit Grade',
-            'grade' => $this->apiRequest('GET', 'https://school.slava.app/api/grades/show/' . $id, $this->getOptions())['data']
+            'grade' => $this->apiRequest('GET', route('api.grades.show', $id), $this->getOptions())['data']
         ]);
     }
 }

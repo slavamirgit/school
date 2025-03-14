@@ -30,7 +30,7 @@ class Store extends Component
 
     public function save(): void
     {
-        $result = $this->apiRequest('PUT', 'https://school.slava.app/api/grades/update/' . $this->grade['id'], $this->getOptions([
+        $result = $this->apiRequest('PUT', route('api.grades.update', $this->grade['id']), $this->getOptions([
             'name' => $this->name
         ]));
 

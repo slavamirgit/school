@@ -32,7 +32,7 @@ trait ApiRequests
         $options = [
             'headers' => [
                 'Content-Type' => 'application/json',
-                'Authorization' => 'Bearer ' . '5Web0ZVHmxGBVhVLmF24XCxAlN1V7im9lDzUkPuU3311a0c0'
+                'Authorization' => 'Bearer ' . session('school_token')
             ],
             'verify' => false
         ];
