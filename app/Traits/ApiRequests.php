@@ -11,8 +11,6 @@ trait ApiRequests
 {
     protected function apiRequest($method, $url, $options = [])
     {
-        $this->checkToken();
-
         $client = new Client();
 
         try {
@@ -37,6 +35,8 @@ trait ApiRequests
 
     protected function getOptions($props = []): array
     {
+        $this->checkToken();
+
         $options = [
             'headers' => [
                 'Content-Type' => 'application/json',
