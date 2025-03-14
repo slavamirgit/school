@@ -52,9 +52,11 @@ class Store extends Component
             $url = config('app.api') . '/students/update/' . $this->student['id'];
             $result = $this->apiRequest('PUT', $url, $this->getOptions($options));
         } else {
-            $url = config('app.api') . '/students/store/';
+            $url = config('app.api') . '/students/store';
             $result = $this->apiRequest('POST', $url, $this->getOptions($options));
         }
+
+        dump($result);
 
         if (isset($result['error'])) {
             $this->error = $result['error'];
