@@ -14,8 +14,6 @@ class StudentResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        //return parent::toArray($request);
-
         return [
             'id' => $this->id,
             'grade' => $this->grade->name,
