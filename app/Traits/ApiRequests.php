@@ -28,11 +28,15 @@ trait ApiRequests
     {
         if (session()->missing('school_token')) {
             $token = Auth::user()->createToken('School Token')->plainTextToken;
-            $token = explode('|', $token)[1];
-            session()->put('school_token', $token);
+            session()->put('school_token', explode('|', $token)[1]);
         }
 
         return session('school_token');
+    }
+
+    protected function getRemoteToken(): string
+    {
+        return 'hC2txM3KCLsBcwUqLFyzMRP4fqU60Yr5j74OrqzX1fe28504';
     }
 
     protected function getOptions($props = []): array
@@ -40,15 +44,14 @@ trait ApiRequests
         $options = [
             'headers' => [
                 'Content-Type' => 'application/json',
-                'Authorization' => 'Bearer ' . $this->getToken()
-                //'Authorization' => 'Bearer ' . 'EJzQorDDI3IYvVsGi3GxVcYwwf65Dn3ArIu5Cubl3e78317b'
+                'Authorization' => 'Bearer ' . $this->getRemoteToken()
             ],
             'verify' => false,
             'connect_timeout' => 20,
             'timeout' => 20
         ];
 
-        if (count($props) > 0) {
+        if (filled($props)) {
             $options = array_merge($options, ['query' => $props]);
         }
 

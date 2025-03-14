@@ -16,14 +16,14 @@
     <div id="sidebar">
         <div class="links">
             <div class="title">{{ __('Grades') }}</div>
-            <a href="{{ route('web.grades.index') }}" wire:current.exact="active">{{ __('Index') }}</a>
-            <a href="{{ route('web.grades.create') }}" wire:current.exact="active">{{ __('Create') }}</a>
+            <a href="{{ route('grades.index') }}" wire:current.exact="active">{{ __('Index') }}</a>
+            <a href="{{ route('grades.create') }}" wire:current.exact="active">{{ __('Create') }}</a>
         </div>
 
         <div class="links">
             <div class="title">{{ __('Students') }}</div>
-            <a href="{{ route('web.students.index') }}" wire:current.exact="active">{{ __('Index') }}</a>
-            <a href="{{ route('web.students.create') }}" wire:current.exact="active">{{ __('Create') }}</a>
+            <a href="{{ route('students.index') }}" wire:current.exact="active">{{ __('Index') }}</a>
+            <a href="{{ route('students.create') }}" wire:current.exact="active">{{ __('Create') }}</a>
         </div>
 
         <x-back.actions.logout/>

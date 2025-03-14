@@ -37,11 +37,11 @@ class Store extends Component
         ];
 
         if ($this->grade) {
-            $result = $this->apiRequest('PUT', route('api.grades.update', $this->grade['id']), $this->getOptions($options));
-            //$result = $this->apiRequest('PUT', 'https://school.slava.app/api/grades/update/' . $this->grade['id'], $this->getOptions($options));
+            $url = config('app.api') . '/grades/update/' . $this->grade['id'];
+            $result = $this->apiRequest('PUT', $url, $this->getOptions($options));
         } else {
-            $result = $this->apiRequest('POST', route('api.grades.store'), $this->getOptions($options));
-            //$result = $this->apiRequest('POST', 'https://school.slava.app/api/grades/store', $this->getOptions($options));
+            $url = config('app.api') . '/grades/store';
+            $result = $this->apiRequest('POST', $url, $this->getOptions($options));
         }
 
         if (isset($result['error'])) {
@@ -51,7 +51,7 @@ class Store extends Component
                 $this->saved = true;
                 $this->error = null;
             } else {
-                $this->redirect(route('web.grades.edit', $result['data']['id']));
+                $this->redirect(route('grades.edit', $result['data']['id']));
             }
         }
     }

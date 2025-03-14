@@ -25,11 +25,11 @@ class Show extends Component
 
     public function delete(): void
     {
-        $result = $this->apiRequest('DELETE', route('api.grades.delete', $this->grade['id']), $this->getOptions());
-        //$result = $this->apiRequest('DELETE', 'https://school.slava.app/api/grades/delete' . $this->grade['id'], $this->getOptions());
+        $url = config('app.api') . '/grades/delete/' . $this->grade['id'];
+        $result = $this->apiRequest('DELETE', $url, $this->getOptions());
 
         if ($result['success']) {
-            redirect()->route('web.grades.index');
+            redirect()->route('grades.index');
         }
     }
 

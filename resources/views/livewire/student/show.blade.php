@@ -8,7 +8,7 @@
     </div>
 
     <div class="actions">
-        <a href="{{ route('web.students.edit', $student['id']) }}" class="button blue">{{ __('Edit') }}</a>
+        <a href="{{ route('students.edit', $student['id']) }}" class="button blue">{{ __('Edit') }}</a>
         <div class="button red" wire:click="delete">{{ __('Delete') }}</div>
     </div>
 </div>

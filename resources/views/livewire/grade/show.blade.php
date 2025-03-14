@@ -5,7 +5,7 @@
     </div>
 
     <div class="actions">
-        <a href="{{ route('web.grades.edit', $grade['id']) }}" class="button blue">{{ __('Edit') }}</a>
+        <a href="{{ route('grades.edit', $grade['id']) }}" class="button blue">{{ __('Edit') }}</a>
         <div class="button red" wire:click="delete">{{ __('Delete') }}</div>
     </div>
 

@@ -10,10 +10,11 @@ class StudentController extends Controller
 
     public function index()
     {
+        $url = config('app.api') . '/students';
+
         return view('site.students.index', [
             'title' => 'Students',
-            'data' => $this->apiRequest('GET', route('api.students.index'), $this->getOptions())['data'] ?? []
-            //'data' => $this->apiRequest('GET', 'https://school.slava.app/api/students', $this->getOptions())['data'] ?? []
+            'data' => $this->apiRequest('GET', $url, $this->getOptions())['data'] ?? []
         ]);
     }
 
@@ -26,19 +27,21 @@ class StudentController extends Controller
 
     public function show($id)
     {
+        $url = config('app.api') . '/students/show/' . $id;
+
         return view('site.students.show', [
             'title' => 'Show Student',
-            'student' => $this->apiRequest('GET', route('api.students.show', $id), $this->getOptions())['data']
-            //'student' => $this->apiRequest('GET', 'https://school.slava.app/api/students/show/' . $id, $this->getOptions())['data']
+            'student' => $this->apiRequest('GET', $url, $this->getOptions())['data']
         ]);
     }
 
     public function edit($id)
     {
+        $url = config('app.api') . '/students/show/' . $id;
+
         return view('site.students.edit', [
             'title' => 'Edit Student',
-            'student' => $this->apiRequest('GET', route('api.students.show', $id), $this->getOptions())['data']
-            //'student' => $this->apiRequest('GET', 'https://school.slava.app/api/students/show/' . $id, $this->getOptions())['data']
+            'student' => $this->apiRequest('GET', $url, $this->getOptions())['data']
         ]);
     }
 }

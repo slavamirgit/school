@@ -19,15 +19,10 @@ class AuthController extends BaseController
         ]);
 
         if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-            $data = [
-                'token' => $user->createToken('School Token')->plainTextToken,
-                'name' => $user->name
-            ];
-
-            return $this->sendResponse($data, 'User logged in successfully.');
+            $token = Auth::user()->createToken('School Token')->plainTextToken;
+            return $this->sendResponse('User logged in successfully.', $token);
         }
 
-        return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
+        return $this->sendError('Incorrect login or password.', [401 => 'Unauthorized'], 401);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Resources\StudentResource;
 use App\Models\Grade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,27 +12,31 @@ class GradeController extends BaseController
 {
     public function index()
     {
+        if (Auth::user()->cannot('viewAny', Grade::class)) {
+            return $this->sendError('Access denied.', [401 => 'Unauthorized'], 401);
+        }
+
         if (Auth::user()->isDirector()) {
             $grades = Grade::all();
         } else {
             $grades = Auth::user()->grades;
         }
 
-        return $this->sendResponse($grades, 'Grades retrieved successfully.');
+        return $this->sendResponse('Grades retrieved successfully.', $grades);
     }
 
     public function store(Request $request)
     {
         if (Auth::user()->cannot('create', Grade::class)) {
-            return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
+            return $this->sendError('Access denied.', [401 => 'Unauthorized'], 401);
         }
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:grades'
+            'name' => ['required', 'unique:grades', 'regex:/^([1-9]|1[0-2])\w$/u']
         ]);
 
         if ($validator->fails()) {
-            return $this->sendError('Validation error', $validator->errors());
+            return $this->sendError('Validation error.', $validator->errors(), 400);
         }
 
         $validated = $validator->validated();
@@ -44,72 +47,72 @@ class GradeController extends BaseController
             $grade->users()->attach(Auth::id());
         }
 
-        return $this->sendResponse($grade, 'Grade created successfully.');
+        return $this->sendResponse('Grade created successfully.', $grade);
     }
 
     public function show($id)
     {
         if (!$grade = Grade::find($id)) {
-            return $this->sendError('Not found.', ['error' => 'Grade not found.']);
+            return $this->sendError('Grade not found.');
         }
 
         if (Auth::user()->cannot('view', $grade)) {
-            return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
+            return $this->sendError('Access denied.', [401 => 'Unauthorized'], 401);
         }
 
-        return $this->sendResponse($grade, 'Grade retrieved successfully.');
+        return $this->sendResponse('Grade retrieved successfully.', $grade);
     }
 
     public function update(Request $request, $id)
     {
         if (!$grade = Grade::find($id)) {
-            return $this->sendError('Not found.', ['error' => 'Grade not found.']);
+            return $this->sendError('Grade not found.');
         }
 
         if (Auth::user()->cannot('update', $grade)) {
-            return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
+            return $this->sendError('Access denied.', [401 => 'Unauthorized'], 401);
         }
 
         $validator = Validator::make($request->all(), [
-            'name' => ['required', Rule::unique('grades')->ignore($id)],
+            'name' => ['required', Rule::unique('grades')->ignore($id), 'regex:/^([1-9]|1[0-2])\w$/u']
         ]);
 
         if ($validator->fails()) {
-            return $this->sendError('Validation error', $validator->errors());
+            return $this->sendError('Validation error.', $validator->errors(), 400);
         }
 
         $validated = $validator->validated();
 
         $grade->update($validated);
 
-        return $this->sendResponse($grade, 'Grade updated successfully.');
+        return $this->sendResponse('Grade updated successfully.', $grade);
     }
 
     public function destroy($id)
     {
         if (!$grade = Grade::find($id)) {
-            return $this->sendError('Not found.', ['error' => 'Grade not found.']);
+            return $this->sendError('Grade not found.');
         }
 
         if (Auth::user()->cannot('delete', $grade)) {
-            return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
+            return $this->sendError('Access denied.', [401 => 'Unauthorized'], 401);
         }
 
         $grade->delete();
 
-        return $this->sendResponse([], 'Grade deleted successfully.');
+        return $this->sendResponse('Grade deleted successfully.');
     }
 
     public function getStudents($id)
     {
         if (!$grade = Grade::find($id)) {
-            return $this->sendError('Not found.', ['error' => 'Grade not found.']);
+            return $this->sendError('Grade not found.');
         }
 
         if (Auth::user()->cannot('view', $grade)) {
-            return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
+            return $this->sendError('Access denied.', [401 => 'Unauthorized'], 401);
         }
 
-        return $this->sendResponse(StudentResource::collection($grade->students), 'Students retrieved successfully.');
+        return $this->sendResponse('Students retrieved successfully.', $grade->students);
     }
 }

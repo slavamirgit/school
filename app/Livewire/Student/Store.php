@@ -49,11 +49,11 @@ class Store extends Component
         $options = $this->validate();
 
         if ($this->student) {
-            $result = $this->apiRequest('PUT', route('api.students.update', $this->student['id']), $this->getOptions($options));
-            //$result = $this->apiRequest('PUT', 'https://school.slava.app/api/students/update/' . $this->student['id'], $this->getOptions($options));
+            $url = config('app.api') . '/students/update/' . $this->student['id'];
+            $result = $this->apiRequest('PUT', $url, $this->getOptions($options));
         } else {
-            $result = $this->apiRequest('POST', route('api.students.store'), $this->getOptions($options));
-            //$result = $this->apiRequest('POST', 'https://school.slava.app/api/students/store/', $this->getOptions($options));
+            $url = config('app.api') . '/students/store/';
+            $result = $this->apiRequest('POST', $url, $this->getOptions($options));
         }
 
         if (isset($result['error'])) {
@@ -63,7 +63,7 @@ class Store extends Component
                 $this->saved = true;
                 $this->error = null;
             } else {
-                $this->redirect(route('web.students.edit', $result['data']['id']));
+                $this->redirect(route('students.edit', $result['data']['id']));
             }
         }
     }
