@@ -18,6 +18,7 @@ class Index extends Component
 
     public function mount($data): void
     {
+        array_multisort(array_column($data, 'id'), SORT_ASC, $data);
         $this->data = $data;
     }
 

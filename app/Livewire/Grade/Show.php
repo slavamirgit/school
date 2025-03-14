@@ -18,14 +18,15 @@ class Show extends Component
 
     public function mount($grade, $students): void
     {
+        array_multisort(array_column($students, 'id'), SORT_ASC, $students);
         $this->grade = $grade;
         $this->students = $students;
     }
 
     public function delete(): void
     {
-        //$result = $this->apiRequest('DELETE', route('api.grades.delete', $this->grade['id']), $this->getOptions());
-        $result = $this->apiRequest('DELETE', 'https://school.slava.app/api/grades/delete' . $this->grade['id'], $this->getOptions());
+        $result = $this->apiRequest('DELETE', route('api.grades.delete', $this->grade['id']), $this->getOptions());
+        //$result = $this->apiRequest('DELETE', 'https://school.slava.app/api/grades/delete' . $this->grade['id'], $this->getOptions());
 
         if ($result['success']) {
             redirect()->route('web.grades.index');
