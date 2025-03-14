@@ -37,8 +37,8 @@ class StudentController extends Controller
     {
         return view('site.students.edit', [
             'title' => 'Edit Student',
-            //'grade' => $this->apiRequest('GET', route('api.grades.show', $id), $this->getOptions())['data']
-            //'grade' => $this->apiRequest('GET', 'https://school.slava.app/api/grades/show/' . $id, $this->getOptions())['data']
+            'student' => $this->apiRequest('GET', route('api.students.show', $id), $this->getOptions())['data']
+            //'student' => $this->apiRequest('GET', 'https://school.slava.app/api/students/show/' . $id, $this->getOptions())['data']
         ]);
     }
 }

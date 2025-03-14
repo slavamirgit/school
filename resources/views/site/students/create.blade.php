@@ -1,5 +1,5 @@
 @extends('layouts.site')
 
 @section('content')
-    <livewire:grade.store/>
+    <livewire:student.store/>
 @endsection

@@ -23,7 +23,7 @@
         <div class="links">
             <div class="title">{{ __('Students') }}</div>
             <a href="{{ route('web.students.index') }}" wire:current.exact="active">{{ __('Index') }}</a>
-            <a href="">{{ __('Create') }}</a>
+            <a href="{{ route('web.students.create') }}" wire:current.exact="active">{{ __('Create') }}</a>
         </div>
 
         <x-back.actions.logout/>

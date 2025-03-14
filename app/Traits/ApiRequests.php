@@ -25,10 +25,6 @@ trait ApiRequests
 
     protected function getOptions($props = []): array
     {
-        if (count($props) > 0) {
-            $props['query'] = $props;
-        }
-
         $options = [
             'headers' => [
                 'Content-Type' => 'application/json',
@@ -40,6 +36,10 @@ trait ApiRequests
             'timeout' => 20
         ];
 
-        return array_merge($options, $props);
+        if (count($props) > 0) {
+            $options = array_merge($options, ['query' => $props]);
+        }
+
+        return $options;
     }
 }

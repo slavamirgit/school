@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Resources\StudentResource;
+use App\Models\Grade;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -82,8 +83,14 @@ class StudentController extends BaseController
 
     private function validateStudent($request)
     {
+        if (Auth::user()->isDirector()) {
+            $in = Rule::in(Grade::all()->pluck('id')->toArray());
+        } else {
+            $in = Rule::in(Auth::user()->grades->pluck('id')->toArray());
+        }
+
         $validator = Validator::make($request->all(), [
-            'grade_id' => ['required', 'integer', Rule::in(Auth::user()->grades->pluck('id')->toArray())],
+            'grade_id' => ['required', 'integer', $in],
             'firstname' => 'required|string',
             'lastname' => 'required|string',
             'sex' => ['required', Rule::in(['M', 'F', 'm', 'f'])],
