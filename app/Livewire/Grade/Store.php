@@ -40,7 +40,7 @@ class Store extends Component
             $result = $this->apiRequest('PUT', route('api.grades.update', $this->grade['id']), $this->getOptions($options));
             //$result = $this->apiRequest('PUT', 'https://school.slava.app/api/grades/update/' . $this->grade['id'], $this->getOptions($options));
         } else {
-            $result = $this->apiRequest('PUT', route('api.grades.store'), $this->getOptions($options));
+            $result = $this->apiRequest('POST', route('api.grades.store'), $this->getOptions($options));
             //$result = $this->apiRequest('POST', 'https://school.slava.app/api/grades/store', $this->getOptions($options));
         }
 
