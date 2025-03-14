@@ -4,12 +4,15 @@ namespace App\Traits;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 trait ApiRequests
 {
     protected function apiRequest($method, $url, $options = [])
     {
+        $this->checkToken();
+
         $client = new Client();
 
         try {
@@ -21,6 +24,15 @@ trait ApiRequests
         }
 
         return $result ?? [];
+    }
+
+    protected function checkToken(): void
+    {
+        if (session()->missing('school_token')) {
+            $token = Auth::user()->createToken('School Token')->plainTextToken;
+            $token = explode('|', $token)[1];
+            session()->put('school_token', $token);
+        }
     }
 
     protected function getOptions($props = []): array
