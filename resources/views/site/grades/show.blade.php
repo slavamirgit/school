@@ -1,5 +1,5 @@
 @extends('layouts.site')
 
 @section('content')
-    <livewire:grade.index/>
+    <livewire:grade.show :$grade :$students/>
 @endsection

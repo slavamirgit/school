@@ -1131,6 +1131,8 @@ button.button {
 /* */
 
 #title {
+    margin-bottom: var(--space);
+
     font-weight: var(--bold);
 
     text-transform: uppercase;
@@ -1619,13 +1621,11 @@ footer.form-holder {
 /* */
 
 [class$=-table] > .header,
-[class$=-table] > .holder,
-[class$=-table] > .footer {
+[class$=-table] > .holder {
     background-color: var(--white);
 }
 
-[class$=-table] > .header,
-[class$=-table] > .footer {
+[class$=-table] > .header {
     padding: .35rem .5rem;
 
     justify-content: space-between;
@@ -1637,15 +1637,15 @@ footer.form-holder {
     border-top-right-radius: var(--br-m);
 }
 
-[class$=-table] > .footer {
-    border-bottom-left-radius: var(--br-m);
-    border-bottom-right-radius: var(--br-m);
+.pagination {
+    margin-top: var(--space);
+    gap: var(--gap);
 }
 
 [class$=-table] > .header,
 [class$=-table] > .header .mass,
 [class$=-table] > .header .quantifier,
-[class$=-table] > .footer {
+.pagination {
     display: flex;
 
     align-items: center;
@@ -1799,25 +1799,25 @@ footer.form-holder {
 
 /* */
 
-[class$=-table] > .footer > .flex {
+.pagination > .flex {
     gap: .2rem;
 }
 
-[class$=-table] > .footer .page,
-[class$=-table] > .footer .dots,
-[class$=-table] > .footer .info {
+.pagination .page,
+.pagination .dots,
+.pagination .info {
     padding-top: .1rem;
     padding-bottom: .1rem;
 }
 
-[class$=-table] > .footer .dots,
-[class$=-table] > .footer .info {
+.pagination .dots,
+.pagination .info {
     padding-left: .2rem;
     padding-right: .2rem;
 }
 
-[class$=-table] > .footer .page,
-[class$=-table] > .footer .svg {
+.pagination .page,
+.pagination .svg {
     background-color: var(--simple);
 
     cursor: pointer;
@@ -1828,32 +1828,32 @@ footer.form-holder {
     transition-timing-function: var(--func);
 }
 
-[class$=-table] > .footer .page:hover,
-[class$=-table] > .footer .svg:hover {
+.pagination .page:hover,
+.pagination .svg:hover {
     background-color: var(--simple-hover);
 }
 
-[class$=-table] > .footer .page {
+.pagination .page {
     padding-left: .5rem;
     padding-right: .5rem;
 }
 
-[class$=-table] > .footer .page.active {
+.pagination .page.active {
     background-color: var(--active);
     color: var(--white);
 }
 
-[class$=-table] > .footer .svg {
+.pagination .svg {
     padding: .3rem;
 
     color: var(--icon);
 }
 
-[class$=-table] > .footer .svg:hover {
+.pagination .svg:hover {
     color: var(--icon-hover);
 }
 
-[class$=-table] > .footer svg {
+.pagination svg {
     width: 16px;
     height: 16px;
 

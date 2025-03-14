@@ -7,7 +7,7 @@
     <meta name="robots" content="noindex, nofollow">
     <title>{{ $title ?? config('app.name') }}</title>
 
-    @vite(['resources/css/fonts.css', 'resources/css/reset.css', 'resources/css/app.css', 'resources/js/alpine.js'])
+    @vite(['resources/css/fonts.css', 'resources/css/reset.css', 'resources/css/app.css'])
 </head>
 <body x-data>
 
@@ -15,13 +15,13 @@
     <div id="sidebar">
         <div class="links">
             <div class="title">{{ __('Grades') }}</div>
-            <a href="{{ route('web.grades') }}">{{ __('Index') }}</a>
+            <a href="{{ route('web.grades.index') }}" wire:current.exact="active">{{ __('Index') }}</a>
             <a href="">{{ __('Create') }}</a>
         </div>
 
         <div class="links">
             <div class="title">{{ __('Students') }}</div>
-            <a href="{{ route('web.students') }}">{{ __('Index') }}</a>
+            <a href="{{ route('web.students.index') }}" wire:current.exact="active">{{ __('Index') }}</a>
             <a href="">{{ __('Create') }}</a>
         </div>
 

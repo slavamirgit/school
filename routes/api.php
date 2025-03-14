@@ -16,6 +16,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/grades/update/{id}', [GradeController::class, 'update'])->name('api.grades.update');
     Route::delete('/grades/delete/{id}', [GradeController::class, 'destroy'])->name('api.grades.delete');
 
+    Route::get('/grades/students/{id}', [GradeController::class, 'getStudents'])->name('api.grades.students');
+
     Route::get('/students', [StudentController::class, 'index'])->name('api.students.index');
     Route::post('/students/store', [StudentController::class, 'store'])->name('api.students.store');
     Route::get('/students/show/{id}', [StudentController::class, 'show'])->name('api.students.show');
