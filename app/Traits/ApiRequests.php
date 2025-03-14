@@ -34,7 +34,9 @@ trait ApiRequests
                 'Content-Type' => 'application/json',
                 'Authorization' => 'Bearer ' . session('school_token')
             ],
-            'verify' => false
+            'verify' => false,
+            'connect_timeout' => 20,
+            'timeout' => 20
         ];
 
         return array_merge($options, $props);

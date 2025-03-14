@@ -8,6 +8,7 @@
     <title>{{ $title ?? config('app.name') }}</title>
 
     @vite(['resources/css/fonts.css', 'resources/css/reset.css', 'resources/css/app.css'])
+    @livewireStyles
 </head>
 <body x-data>
 
@@ -84,6 +85,8 @@
         <path d="m11,2V0h-6v2H1v2h2v12h10V4h2v-2h-4Zm0,12h-2V6h-2v8h-2V4h6v10Z"/>
     </symbol><!--[ #svg-delete ]-->
 </svg>
+
+@livewireScripts
 
 </body>
 </html>
