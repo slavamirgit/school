@@ -34,7 +34,7 @@ trait ApiRequests
 
     protected function getRemoteToken(): string
     {
-        return 'x5dQwl0TFsxhKduDOXnUQhCklNLLokIZkyp40xpwb962dc43';
+        return 'qXKM52kI7ZPIuRlm4Dtx0neyS6xkrdwkCZgKe7bz91f5ffc1';
     }
 
     protected function getOptions($props = []): array

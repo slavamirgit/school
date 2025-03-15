@@ -1033,6 +1033,18 @@ button.button {
 
 /* */
 
+#sidebar .intro {
+    padding-left: var(--space);
+    padding-right: var(--space);
+
+    color: var(--white);
+}
+
+/* */
+
+
+/* */
+
 #sidebar,
 #sidebar .links {
     display: flex;
@@ -1803,6 +1815,32 @@ footer.form-holder {
     gap: .2rem;
 }
 
+.pagination a {
+    background-color: var(--simple);
+
+    border-radius: var(--br-s);
+}
+
+.pagination a,
+.pagination a:hover {
+    color: inherit;
+}
+
+.pagination a:not(.active):hover,
+.pagination a:not(.disabled):hover {
+    background-color: var(--simple-hover);
+}
+
+.pagination a.active,
+.pagination a.active:hover {
+    background-color: var(--active);
+    color: var(--white);
+}
+
+.pagination .disabled {
+    opacity: .5;
+}
+
 .pagination .page,
 .pagination .dots,
 .pagination .info {
@@ -1816,41 +1854,15 @@ footer.form-holder {
     padding-right: .2rem;
 }
 
-.pagination .page,
-.pagination .svg {
-    background-color: var(--simple);
-
-    cursor: pointer;
-
-    border-radius: var(--br-s);
-
-    transition-duration: var(--dur);
-    transition-timing-function: var(--func);
-}
-
-.pagination .page:hover,
-.pagination .svg:hover {
-    background-color: var(--simple-hover);
-}
-
 .pagination .page {
     padding-left: .5rem;
     padding-right: .5rem;
-}
-
-.pagination .page.active {
-    background-color: var(--active);
-    color: var(--white);
 }
 
 .pagination .svg {
     padding: .3rem;
 
     color: var(--icon);
-}
-
-.pagination .svg:hover {
-    color: var(--icon-hover);
 }
 
 .pagination svg {

@@ -14,6 +14,11 @@
 
 <div id="wrapper">
     <div id="sidebar">
+        <div class="intro">
+            <div>{{ auth()->user()->name }}</div>
+            <div>{{ auth()->user()->role->name }}</div>
+        </div>
+
         <div class="links">
             <div class="title">{{ __('Grades') }}</div>
             <a href="{{ route('grades.index') }}" wire:current.exact="active">{{ __('Index') }}</a>
