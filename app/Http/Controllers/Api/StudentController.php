@@ -23,6 +23,7 @@ class StudentController extends BaseController
             $students = Student::whereIn('grade_id', $grades)->with('grade')->paginate(10);
         }
 
+        // StudentResource::collection($students)
         return $this->sendResponse('Students retrieved successfully.', $students);
     }
 

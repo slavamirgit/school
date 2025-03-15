@@ -30,9 +30,4 @@ class StudentResource extends JsonResource
             'age' => $this->age
         ];
     }
-
-    public function paginationInformation(Request $request, $paginated, $default): array
-    {
-        return [];
-    }
 }
