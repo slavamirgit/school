@@ -17,7 +17,7 @@ class GradeController extends BaseController
         }
 
         if (Auth::user()->isDirector()) {
-            $grades = Grade::orderBy('id')->paginate(10);
+            $grades = Grade::paginate(10);
         } else {
             $grades = Auth::user()->grades()->orderBy('id')->paginate(10);
         }
