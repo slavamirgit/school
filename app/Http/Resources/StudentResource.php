@@ -5,6 +5,13 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property mixed $id
+ * @property mixed $firstname
+ * @property mixed $lastname
+ * @property mixed $sex
+ * @property mixed $age
+ */
 class StudentResource extends JsonResource
 {
     /**
@@ -16,7 +23,7 @@ class StudentResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'grade' => $this->grade->name,
+            'grade' => $this->whenLoaded('grade'),
             'firstname' => $this->firstname,
             'lastname' => $this->lastname,
             'sex' => $this->sex,
