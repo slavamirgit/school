@@ -9,6 +9,10 @@
         <div class="button red" wire:click="delete">{{ __('Delete') }}</div>
     </div>
 
+    @if($error)
+        <div class="error">{{ $error }}</div>
+    @endif
+
     <div>
         <div>{{ __('Students') }}</div>
 

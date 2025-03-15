@@ -11,4 +11,8 @@
         <a href="{{ route('students.edit', $student['id']) }}" class="button blue">{{ __('Edit') }}</a>
         <div class="button red" wire:click="delete">{{ __('Delete') }}</div>
     </div>
+
+    @if($error)
+        <div class="error">{{ $error }}</div>
+    @endif
 </div>

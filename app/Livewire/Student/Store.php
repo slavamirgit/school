@@ -56,15 +56,15 @@ class Store extends Component
             $result = $this->apiRequest('POST', $url, $this->getOptions($options));
         }
 
-        if (isset($result['error'])) {
-            $this->error = $result['error'];
-        } else {
+        if ($result['success']) {
             if ($this->student) {
                 $this->saved = true;
                 $this->error = null;
             } else {
                 $this->redirect(route('students.edit', $result['data']['id']));
             }
+        } else {
+            $this->error = $this->parseErrors($result);
         }
     }
 

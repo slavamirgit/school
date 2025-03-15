@@ -31,7 +31,7 @@ class StudentController extends Controller
 
         return view('site.students.show', [
             'title' => 'Show Student',
-            'student' => $this->apiRequest('GET', $url, $this->getOptions())['data']
+            'student' => $this->apiRequest('GET', $url, $this->getOptions())['data'] ?? abort(404)
         ]);
     }
 
@@ -41,7 +41,7 @@ class StudentController extends Controller
 
         return view('site.students.edit', [
             'title' => 'Edit Student',
-            'student' => $this->apiRequest('GET', $url, $this->getOptions())['data']
+            'student' => $this->apiRequest('GET', $url, $this->getOptions())['data'] ?? abort(404)
         ]);
     }
 }

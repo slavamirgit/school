@@ -15,10 +15,11 @@ class Show extends Component
     public $grade;
     #[Locked]
     public $students;
+    #[Locked]
+    public $error;
 
     public function mount($grade, $students): void
     {
-        //array_multisort(array_column($students, 'id'), SORT_ASC, $students);
         $this->grade = $grade;
         $this->students = $students;
     }
@@ -30,6 +31,8 @@ class Show extends Component
 
         if ($result['success']) {
             redirect()->route('grades.index');
+        } else {
+            $this->error = $this->parseErrors($result);
         }
     }
 

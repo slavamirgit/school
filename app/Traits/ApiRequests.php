@@ -5,7 +5,6 @@ namespace App\Traits;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 trait ApiRequests
 {
@@ -17,8 +16,7 @@ trait ApiRequests
             $response = $client->request($method, $url, $options);
             $result = json_decode($response->getBody()->getContents(), true);
         } catch (GuzzleException $e) {
-            Log::error($e->getMessage());
-            $result['error'] = $e->getMessage();
+            $result = json_decode($e->getResponse()->getBody()->getContents(), true);
         }
 
         return $result ?? [];
@@ -56,5 +54,18 @@ trait ApiRequests
         }
 
         return $options;
+    }
+
+    protected function parseErrors($data)
+    {
+        $result = $data['message'] ?? 'Error.';
+
+        if (isset($data['errors'])) {
+            foreach ($data['errors'] as $error) {
+                $result .= ' ' . implode(' ', $error);
+            }
+        }
+
+        return $result;
     }
 }

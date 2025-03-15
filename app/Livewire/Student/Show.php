@@ -13,6 +13,8 @@ class Show extends Component
 
     #[Locked]
     public $student;
+    #[Locked]
+    public $error;
 
     public function mount($student): void
     {
@@ -26,6 +28,8 @@ class Show extends Component
 
         if ($result['success']) {
             redirect()->route('students.index');
+        } else {
+            $this->error = $this->parseErrors($result);
         }
     }
 
