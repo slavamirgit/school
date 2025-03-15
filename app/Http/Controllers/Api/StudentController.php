@@ -33,8 +33,13 @@ class StudentController extends BaseController
             return $this->sendError('Access denied.', [401 => 'Unauthorized'], 401);
         }
 
-        $validated = $this->validateStudent($request);
-        $student = Student::create($validated);
+        $validation = $this->studentValidation($request);
+
+        if (!$validation['success']) {
+            return $this->sendError('Validation error.', $validation['errors'], 400);
+        }
+
+        $student = Student::create($validation['data']);
 
         return $this->sendResponse('Student created successfully.', $student, 201);
     }
@@ -62,8 +67,13 @@ class StudentController extends BaseController
             return $this->sendError('Access denied.', [401 => 'Unauthorized'], 401);
         }
 
-        $validated = $this->validateStudent($request);
-        $student->update($validated);
+        $validation = $this->studentValidation($request);
+
+        if (!$validation['success']) {
+            return $this->sendError('Validation error.', $validation['errors'], 400);
+        }
+
+        $student->update($validation['data']);
 
         return $this->sendResponse('Student updated successfully.', $student);
     }
@@ -83,7 +93,7 @@ class StudentController extends BaseController
         return $this->sendResponse('Student deleted successfully.');
     }
 
-    private function validateStudent($request)
+    private function studentValidation($request)
     {
         if (Auth::user()->isDirector()) {
             $exist = Rule::exists('grades', 'id');
@@ -100,12 +110,18 @@ class StudentController extends BaseController
         ]);
 
         if ($validator->fails()) {
-            return $this->sendError('Validation error.', $validator->errors(), 400);
+            return [
+                'success' => false,
+                'errors' => $validator->errors()
+            ];
         }
 
         $validated = $validator->validated();
         $validated['sex'] = strtoupper($validated['sex']);
 
-        return $validated;
+        return [
+            'success' => true,
+            'data' => $validated
+        ];
     }
 }
