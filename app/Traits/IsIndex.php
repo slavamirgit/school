@@ -29,7 +29,7 @@ trait IsIndex
         parse_str($next['query'] ?? null, $next);
 
         return view($this->view, [
-            'grades' => $this->data['data'],
+            'items' => $this->data['data'],
             'prev' => $prev['page'] ?? null,
             'next' => $next['page'] ?? null
         ]);

@@ -1,5 +1,5 @@
 <div>
-    @foreach($grades as $_grade)
+    @foreach($items as $_grade)
         <div>
             <div>
                 <a href="{{ route('grades.show', $_grade['id']) }}">{{ $_grade['id'] }} — {{ $_grade['name'] }}</a>

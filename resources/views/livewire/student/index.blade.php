@@ -1,5 +1,7 @@
 <div>
-    @foreach($students as $_student)
+    @dump($data)
+
+    @foreach($items as $_student)
         <div>
             <div>
                 <a href="{{ route('students.show', $_student['id']) }}">{{ $_student['id'] }} — {{ $_student['firstname'] . ' ' . $_student['lastname'] . ', ' . $_student['sex'] . ', ' . $_student['age'] }}</a>
