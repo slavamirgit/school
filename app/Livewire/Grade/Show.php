@@ -18,7 +18,7 @@ class Show extends Component
 
     public function mount($grade, $students): void
     {
-        array_multisort(array_column($students, 'id'), SORT_ASC, $students);
+        //array_multisort(array_column($students, 'id'), SORT_ASC, $students);
         $this->grade = $grade;
         $this->students = $students;
     }
