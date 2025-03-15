@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Resources\StudentResource;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,13 +17,14 @@ class StudentController extends BaseController
         }
 
         if (Auth::user()->isDirector()) {
-            $students = Student::all();
+            $students = Student::paginate(10);
         } else {
             $grades = Auth::user()->grades->pluck('id')->toArray();
-            $students = Student::whereIn('grade_id', $grades)->with('grade')->get();
+            $students = Student::whereIn('grade_id', $grades)->with('grade')->paginate(10);
         }
 
-        return $this->sendResponse('Students retrieved successfully.', StudentResource::collection($students));
+        // Before: StudentResource::collection($students)
+        return $this->sendResponse('Students retrieved successfully.', $students);
     }
 
     public function store(Request $request)

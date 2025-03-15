@@ -1,3 +1,32 @@
+<div class="flex">
+    @foreach($data['links'] as $_link)
+        @if($loop->first)
+            @if($prev)
+                <a href="{{ request()->fullUrlWithQuery(['page' => $prev]) }}" class="svg prev">
+                    <svg>
+                        <use xlink:href="#svg-prev"/>
+                    </svg>
+                </a>
+            @endif
+        @elseif($loop->last)
+            @if($next)
+                <a href="{{ request()->fullUrlWithQuery(['page' => $next]) }}" class="svg next">
+                    <svg>
+                        <use xlink:href="#svg-next"/>
+                    </svg>
+                </a>
+            @endif
+        @else
+            <a href="{{ request()->fullUrlWithQuery(['page' => $_link['label']]) }}" class="page">{{ $_link['label'] }}</a>
+        @endif
+    @endforeach
+</div>
+
+<div class="flex">
+    <div>{{ $data['from'] . ' — ' . $data['to'] . ' of ' . $data['total'] }}</div>
+</div>
+
+{{--
 @if($paginator->hasPages())
     <div class="flex">
         @foreach($elements as $element)
@@ -37,3 +66,4 @@
 @else
     &nbsp;
 @endif
+--}}

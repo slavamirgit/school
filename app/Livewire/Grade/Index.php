@@ -2,28 +2,17 @@
 
 namespace App\Livewire\Grade;
 
-use Illuminate\View\View;
-use Livewire\Attributes\Locked;
+use App\Traits\IsIndex;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class Index extends Component
 {
-    //use IsIndex;
+    use IsIndex;
     use WithPagination;
 
-    #[Locked]
-    public array $data;
-
-    public function mountIsIndex($data): void
+    public function mount(): void
     {
-        $this->data = $data;
-    }
-
-    public function render(): View
-    {
-        return view('livewire.grade.index', [
-            'grades' => collect($this->data)->paginate(10)
-        ]);
+        $this->view = 'livewire.grade.index';
     }
 }

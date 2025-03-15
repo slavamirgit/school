@@ -8,6 +8,6 @@
     @endforeach
 
     <div class="pagination">
-        {{ $students->links() }}
+        @include('misc.pagination')
     </div>
 </div>

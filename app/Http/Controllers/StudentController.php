@@ -14,7 +14,7 @@ class StudentController extends Controller
 
         return view('site.students.index', [
             'title' => 'Students',
-            'data' => $this->apiRequest('GET', $url, $this->getOptions())['data'] ?? []
+            'data' => $this->apiRequest('GET', $url, $this->getOptions(['page' => (int)request()->page]))['data'] ?? abort(404)
         ]);
     }
 

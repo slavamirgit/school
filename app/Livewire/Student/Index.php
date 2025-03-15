@@ -3,7 +3,6 @@
 namespace App\Livewire\Student;
 
 use App\Traits\IsIndex;
-use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -12,10 +11,8 @@ class Index extends Component
     use IsIndex;
     use WithPagination;
 
-    public function render(): View
+    public function mount(): void
     {
-        return view('livewire.student.index', [
-            'students' => collect($this->data)->paginate(10)
-        ]);
+        $this->view = 'livewire.student.index';
     }
 }

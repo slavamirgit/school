@@ -1,6 +1,4 @@
 <div>
-    @dump($data)
-    {{--
     @foreach($grades as $_grade)
         <div>
             <div>
@@ -10,7 +8,6 @@
     @endforeach
 
     <div class="pagination">
-        {{ $grades->links() }}
+        @include('misc.pagination')
     </div>
-    --}}
 </div>

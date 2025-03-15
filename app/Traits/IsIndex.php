@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use Illuminate\View\View;
 use Livewire\Attributes\Locked;
 
 trait IsIndex
@@ -10,21 +11,27 @@ trait IsIndex
     public array $data;
     #[Locked]
     public int $pageNumber;
+    #[Locked]
+    public string $view;
 
     public function mountIsIndex($data): void
     {
-        array_multisort(array_column($data, 'id'), SORT_ASC, $data);
         $this->data = $data;
-        $this->pageNumber = request()->page ?? 1;
+        $this->pageNumber = (int)request()->query('page', 1);
     }
 
-    public function updatingPage($pageNumber): void
+    public function render(): View
     {
-        $this->pageNumber = $pageNumber;
-    }
+        $prev = parse_url($this->data['prev_page_url']);
+        parse_str($prev['query'] ?? null, $prev);
 
-    public function paginationView(): string
-    {
-        return 'misc.pagination';
+        $next = parse_url($this->data['next_page_url']);
+        parse_str($next['query'] ?? null, $next);
+
+        return view($this->view, [
+            'grades' => $this->data['data'],
+            'prev' => $prev['page'] ?? null,
+            'next' => $next['page'] ?? null
+        ]);
     }
 }
