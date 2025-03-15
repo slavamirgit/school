@@ -10,14 +10,11 @@ trait IsIndex
     #[Locked]
     public array $data;
     #[Locked]
-    public int $pageNumber;
-    #[Locked]
     public string $view;
 
     public function mountIsIndex($data): void
     {
         $this->data = $data;
-        $this->pageNumber = (int)request()->query('page', 1);
     }
 
     public function render(): View
@@ -30,8 +27,8 @@ trait IsIndex
 
         return view($this->view, [
             'items' => $this->data['data'],
-            'prev' => $prev['page'] ?? null,
-            'next' => $next['page'] ?? null
+            'prev' => $prev,
+            'next' => $next
         ]);
     }
 }

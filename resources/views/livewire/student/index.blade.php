@@ -1,6 +1,4 @@
 <div>
-    @dump($data)
-
     @foreach($items as $_student)
         <div>
             <div>
