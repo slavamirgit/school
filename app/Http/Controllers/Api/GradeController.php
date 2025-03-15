@@ -17,9 +17,9 @@ class GradeController extends BaseController
         }
 
         if (Auth::user()->isDirector()) {
-            $grades = Grade::all();
+            $grades = Grade::paginate(10);
         } else {
-            $grades = Auth::user()->grades;
+            $grades = Auth::user()->grades()->paginate(10);
         }
 
         return $this->sendResponse('Grades retrieved successfully.', $grades);

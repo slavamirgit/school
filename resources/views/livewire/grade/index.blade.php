@@ -1,4 +1,6 @@
 <div>
+    @dump($data)
+    {{--
     @foreach($grades as $_grade)
         <div>
             <div>
@@ -10,4 +12,5 @@
     <div class="pagination">
         {{ $grades->links() }}
     </div>
+    --}}
 </div>
