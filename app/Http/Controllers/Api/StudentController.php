@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Resources\StudentResource;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +23,7 @@ class StudentController extends BaseController
             $students = Student::whereIn('grade_id', $grades)->with('grade')->paginate(10);
         }
 
-        return $this->sendResponse('Students retrieved successfully.', StudentResource::collection($students));
+        return $this->sendResponse('Students retrieved successfully.', $students);
     }
 
     public function store(Request $request)
